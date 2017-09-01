@@ -15,9 +15,14 @@ let handleUpdate (agent : MailboxProcessor<Command>)
         | _ -> ()
     }
 
+let help = 
+    "dotnet run <telegram token> <telegram chat title> <github token> <github owner> <github repository name>"
+
 [<EntryPoint>]
 let main argv = 
-    let config = Config.tryParse argv |> Option.get
-    let agent = Github.makeAgent config.github
-    Telegram.repl config.telegram (handleUpdate agent)
+    match Config.tryParse argv with
+    | Some config -> 
+        let agent = Github.makeAgent config.github
+        Telegram.repl config.telegram (handleUpdate agent)
+    | None -> printf "%s" help
     0
