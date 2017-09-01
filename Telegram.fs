@@ -5,7 +5,7 @@ open Telegram.Bot.Types
 open TelegramAnswers
 open TelegramAnswers.Log
 
-let repl config (action : Update -> Async<unit>) = 
+let repl config action = 
     async { 
         let bot = TelegramBotClient(config.token)
         let mutable offset = 0
