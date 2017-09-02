@@ -44,8 +44,8 @@ module String =
         else text.Substring(0, size - 1) + "…"
 
 module Config = 
-    let tryParse argv = 
-        match argv with
+    let tryParse = 
+        function
         | [| tgToken; chat; ghToken; repoOwner; repoName |] -> 
             { github = 
                   { repoOwner = repoOwner
