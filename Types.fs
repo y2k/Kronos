@@ -94,8 +94,8 @@ module Domain =
                             upd.Message.ReplyToMessage.Text |> clearFromMarker } }
         else Unknown
     
-    let actionToCommand a = 
-        match a with
+    let actionToCommand = 
+        function 
         | Question x -> CreateIssue(x.id, x.title, x.text) |> Some
         | Answer x -> CreateComment(x.question.id, x.time, x.text) |> Some
-        | _ -> None
+        | Unknown -> None
